@@ -1,20 +1,20 @@
 <template>
   <div class="container">
-    <Home />
+    <!-- <Home /> -->
+    <router-view></router-view>
   </div>
 </template>
 
 <script>
-import Home from './views/layout/Home.vue';
+// import Home from './views/layout/Home.vue';
 
 export default {
   name: 'app',
   components: {
-    Home,
+    // Home,
   },
 };
 </script>
 
-<style>
-
+<style scoped>
 </style>

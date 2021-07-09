@@ -14,14 +14,24 @@
       </a-breadcrumb>
     </div>
     <div class="user-info">
-      <li>用户信息 <a-icon type="down" /></li>
-      <li>退出</li>
+      <li>{{ $store.state.userData.username }} <a-icon type="down" /></li>
+      <li @click="logout">退出</li>
     </div>
   </div>
 </template>
 
 <script>
-export default {};
+
+export default {
+  methods: {
+    logout() {
+      this.$store.dispatch('logout');
+      this.$router.push({
+        name: 'Login',
+      });
+    },
+  },
+};
 </script>
 
 <style>
