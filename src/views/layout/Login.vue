@@ -76,7 +76,7 @@ export default {
               }
             })
             .catch((error) => {
-              console.log('err', error);
+              console.log('login错误', error);
               // alert(error.data.msg);
               // return;
             });
