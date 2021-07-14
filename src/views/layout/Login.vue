@@ -58,17 +58,13 @@ export default {
       e.preventDefault();
       this.form.validateFieldsAndScroll((err, values) => {
         if (!err) {
-          // console.log('Received values of form: ', values);
           api
             .login(values)
             .then((res) => {
               const { data } = res;
-              // console.log("then", res);
               if (data.status === 'fail') {
-                // alert(data.msg);
                 this.$message.error(data.msg);
               } else if (data.status === 'success') {
-                console.log(data);
                 this.$store.dispatch('setUserData', data.data);
                 this.$router.push({
                   name: 'Home',
@@ -77,8 +73,6 @@ export default {
             })
             .catch((error) => {
               console.log('login错误', error);
-              // alert(error.data.msg);
-              // return;
             });
         }
       });

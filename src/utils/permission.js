@@ -4,14 +4,14 @@
 // }
 
 export default function roleAdmin(role, routes) {
-  console.log(routes);
+  //   console.log(routes);
   // return roleMain[role];
   if (role === 'admin') return routes;
-  const menuRoutes = routes.filters((it) => {
+  const menuRoutes = routes.filter((it) => {
     const obj = it;
     if (obj.children) {
-      obj.children = it.children.filters((i) => i.meta.role === 'all');
-      return true;
+      const { children } = obj;
+      obj.children = children.filter((i) => i.meta.role === 'all');
     }
     return it.meta.role === 'all';
   });

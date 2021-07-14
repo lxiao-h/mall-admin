@@ -8,6 +8,9 @@
       :class="{ 'head-fold': $store.state.collapsed }"
     >
       <SliderNav />
+      <div class="container">
+        <router-view></router-view>
+      </div>
     </div>
     <!-- 用户信息 -->
   </div>

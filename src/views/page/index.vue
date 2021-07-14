@@ -1,3 +1,19 @@
 <template>
-    <h2>统计页面</h2>
+<div class="indexContainer">
+    <Card/>
+</div>
 </template>
+
+<script>
+import Card from '@/components/Card.vue';
+
+export default {
+  components: {
+    Card,
+  },
+};
+</script>
+
+<style>
+
+</style>

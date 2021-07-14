@@ -10,7 +10,7 @@
     <div class="breadcurmb">
       <a-breadcrumb>
         <a-breadcrumb-item>首页</a-breadcrumb-item>
-        <a-breadcrumb-item>统计</a-breadcrumb-item>
+        <a-breadcrumb-item>{{$route.meta.title}}</a-breadcrumb-item>
       </a-breadcrumb>
     </div>
     <div class="user-info">
