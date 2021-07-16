@@ -67,7 +67,7 @@ export default {
               } else if (data.status === 'success') {
                 this.$store.dispatch('setUserData', data.data);
                 this.$router.push({
-                  name: 'Home',
+                  name: 'Index',
                 });
               }
             })

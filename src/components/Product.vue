@@ -1,10 +1,10 @@
 <template>
-  <div id="components-table-demo-size" style="text-align:center;">
-    <a-table :columns="columns" :data-source="dataTable"  >
-    <div slot="operation" slot-scope="text, record">
-      <a-button @click="editProduct(record)">编辑</a-button>
-      <a-button @click="deleteProduct(record)">删除</a-button>
-    </div>
+  <div id="components-table-demo-size" style="text-align: center">
+    <a-table :columns="columns" :data-source="dataTable">
+      <div slot="operation" slot-scope="text, record">
+        <a-button @click="editProduct(record)">编辑</a-button>
+        <a-button @click="deleteProduct(record)">删除</a-button>
+      </div>
     </a-table>
   </div>
 </template>
@@ -32,8 +32,8 @@ const columns = [
   },
   {
     title: '类目',
-    dataIndex: 'categoryName',
-    key: 'categoryName',
+    dataIndex: 'category',
+    key: 'category',
     width: 100,
     ellipsis: true,
   },
@@ -91,13 +91,14 @@ export default {
   created() {
     // console.log(this.data);
     // console.log(this.category);
+    // console.log(this.dataTable);
   },
   computed: {
     dataTable() {
       return this.data.map((it) => ({
         ...it,
         key: it.id,
-        categoryName: this.category[it.category].name,
+        // categoryName: this.category[it.category],
       }));
     },
   },

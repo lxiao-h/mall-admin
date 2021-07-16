@@ -9,14 +9,20 @@
         v-if="current < steps.length - 1"
         :form="form"
       />
-      <DetailNextProduct @prev="prev" v-if="current> 0"
-      style="margin-left: 8px"  :form="form"/>
+      <DetailNextProduct
+        @prev="prev"
+        v-if="current > 0"
+        style="margin-left: 8px"
+        :form="form"
+        @handleSubmit="handleSubmit"
+      />
     </div>
   </div>
 </template>
 <script>
 import DetailNextProduct from '@/components/DetailNextProduct.vue';
 import DetailProduct from '@/components/DetailProduct.vue';
+import api from '@/api/product';
 
 export default {
   data() {
@@ -33,30 +39,16 @@ export default {
         },
       ],
       form: {
-        appkey: 'liuxiao_1623650674380',
-        c_item: '香梨',
-        category: 2,
-        categoryName: '安心乳品',
-        desc: '润肺去火 应季佳品',
-        id: 14,
-        images: (2)[
-          ('https://duyi-bucket.oss-cn-beijing.aliyuncs.com/img/丰水梨5金装.jpg',
-          'http://duyi-bucket.oss-cn-beijing.aliyuncs.com/mal…ages/%E9%BB%84%E6%A8%B1%E6%A1%831593413677378.jpg')
-        ],
-        inventory: 100,
-        key: 14,
-        name: null,
-        number: null,
-        price: 29.9,
-        price_off: 29.9,
-        sale: 10010,
-        status: 1,
-        tags: (2)[('限时秒杀', '满69-10')],
-        title: '丰水梨5金装 单果300g起',
-        unit: 'g',
-        updateTime: '2021-05-28T06:59:09.048Z',
-        __v: 0,
-        _id: '60c6f172f378034fba153120',
+        title: '',
+        desc: '',
+        category: '',
+        c_items: [],
+        tags: [],
+        price: 0,
+        price_off: 0,
+        unit: '',
+        inventory: 0,
+        images: [],
       },
     };
   },
@@ -65,7 +57,18 @@ export default {
     DetailProduct,
   },
   created() {
-    console.log(this.$route.params.id);
+    if (this.$route.params.id) {
+      api
+        .getProduct(this.$route.params.id, this.$store.state.userData)
+        .then((res) => {
+          this.form = { ...res.data.data };
+        });
+    }
+  },
+  watch: {
+    form(n, o) {
+      console.log(n, o);
+    },
   },
   methods: {
     next() {
@@ -73,6 +76,26 @@ export default {
     },
     prev() {
       this.current -= 1;
+    },
+    handleSubmit(formData) {
+      if (this.$route.params.id) {
+        api.editProduct(formData).then((res) => {
+          if (res.data.status === 'success') {
+            this.$message.success('修改成功');
+            this.$router.push({
+              name: 'ProductList',
+            });
+          } else {
+            this.$message.error('修改失败');
+          }
+        });
+      } else {
+        api
+          .addProduct({ ...formData, ...this.$store.state.userData })
+          .then((res) => {
+            console.log(res);
+          });
+      }
     },
   },
 };

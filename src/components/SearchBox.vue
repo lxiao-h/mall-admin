@@ -30,7 +30,9 @@ export default {
   created() {
   },
   methods: {
-    handleSubmit() {},
+    handleSubmit() {
+      this.emit('search');
+    },
   },
 };
 </script>

@@ -29,29 +29,37 @@ export default {
     Product,
   },
   created() {
-    const user = this.$store.state.userData;
-    api.getProductCategory(user).then((res) => {
+    api.getProductCategory(this.$store.state.userData).then((res) => {
       this.categoryList = res.data.data.data;
     });
-    api.getAll(user).then((res) => {
+    api.getAll(this.$store.state.userData).then((res) => {
       this.productList = res.data.data.data;
     });
   },
   methods: {
     editProduct(record) {
-      api.editProduct(record).then((res) => {
-        console.log(`编辑：${res.data.msg}`);
-        console.log(record);
-        this.$router.push({
-          name: 'ProductEdit',
-          params: {
-            id: record.id,
-          },
-        });
+      this.$router.push({
+        name: 'ProductEdit',
+        params: {
+          id: record.id,
+        },
       });
     },
     deleteProduct(record) {
       console.log('delete', record);
+      api.deleteProduct(record.id, this.$store.state.userData).then((res) => {
+        if (res.data.status === 'success') {
+          this.$notification.success({
+            message: 'Notification Title',
+            description:
+              '删除成功！',
+            icon: <a-icon type="smile" style="color: #108ee9" />,
+          });
+          api.getAll(this.$store.state.userData).then((r) => {
+            this.productList = r.data.data.data;
+          });
+        }
+      });
     },
   },
 };
