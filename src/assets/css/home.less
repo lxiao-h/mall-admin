@@ -32,10 +32,13 @@
             float     : right;
             text-align: center;
             cursor    : pointer;
-
+            position: relative;
             :not(:first-child) {
                 display: none;
-
+                position: absolute;
+                top:50px;
+                left:10px;
+                z-index: 10;
                 &:hover {
                     background-color: #eee;
                     color           : #999;

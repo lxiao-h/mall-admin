@@ -32,7 +32,7 @@ const columns = [
   },
   {
     title: '类目',
-    dataIndex: 'category',
+    dataIndex: 'categoryName',
     key: 'category',
     width: 100,
     ellipsis: true,
@@ -98,7 +98,7 @@ export default {
       return this.data.map((it) => ({
         ...it,
         key: it.id,
-        // categoryName: this.category[it.category],
+        categoryName: this.category.length > 0 ? this.category[it.category].name : '',
       }));
     },
   },

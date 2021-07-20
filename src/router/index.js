@@ -18,16 +18,6 @@ const asyncRoutes = [{
   },
   component: Home,
   children: [{
-    path: '/category',
-    name: 'Category',
-    meta: {
-      title: '类别管理',
-      role: 'admin',
-      icon: 'info',
-      showBar: true,
-    },
-    component: () => import('@/views/page/category.vue'),
-  }, {
     path: '/productAdd',
     name: 'ProductAdd',
     meta: {
@@ -57,6 +47,16 @@ const asyncRoutes = [{
       showBar: false,
     },
     component: () => import('@/views/page/productAdd.vue'),
+  }, {
+    path: '/category',
+    name: 'Category',
+    meta: {
+      title: '类别管理',
+      role: 'all',
+      icon: 'info',
+      showBar: true,
+    },
+    component: () => import('@/views/page/category.vue'),
   }],
 }];
 
@@ -94,6 +94,7 @@ const routes = [{
 }];
 
 const router = new VueRouter({
+  mode: 'hash',
   routes,
 });
 let isAdd = false;
